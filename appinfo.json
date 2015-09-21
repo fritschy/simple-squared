@@ -1,0 +1,18 @@
+{
+  "uuid": "e93155d2-ca9a-4006-b23a-4a68af76113f",
+  "shortName": "simple-squared",
+  "longName": "simple-squared",
+  "companyName": "fritschy.de",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["basalt"],
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
