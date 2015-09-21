@@ -7,12 +7,20 @@
   "sdkVersion": "3",
   "targetPlatforms": ["basalt"],
   "watchapp": {
-    "watchface": false
+    "watchface": true
   },
   "appKeys": {
     "dummy": 0
   },
   "resources": {
     "media": []
-  }
+  },
+  "appKeys": {
+      "KEY_BG": 0,
+      "KEY_FG": 1,
+      "KEY_BG2": 2,
+      "KEY_FG2": 3
+  },
+  "capabilities": 
+     [ "configurable" ]
 }

@@ -38,7 +38,33 @@
       <div class='item-container-content'>
         <label class='item'>
           Foreground Color
-          <input id='foreground_color_picker' type='text' class='item-color item-color-normal' value='#000000'>
+          <input id='foreground_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's foreground color.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Date Strip Background Color</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Date Strip Background Color
+          <input id='background2_color_picker' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background color.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Date Strip Foreground Color</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Date Strip Foreground Color
+          <input id='foreground2_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
         </label>
       </div>
       <div class='item-container-footer'>
@@ -55,16 +81,22 @@
   <script>
   function getConfigData() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
+    var background2ColorPicker = document.getElementById('background2_color_picker');
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
+    var foreground2ColorPicker = document.getElementById('foreground2_color_picker');
  
     var options = {
       'bg': backgroundColorPicker.value,
+      'bg2': background2ColorPicker.value,
       'fg': foregroundColorPicker.value,
+      'fg2': foreground2ColorPicker.value,
     };
 
     // Save for next launch
     localStorage['bg'] = options['bg'];
+    localStorage['bg2'] = options['bg2'];
     localStorage['fg'] = options['fg'];
+    localStorage['fg2'] = options['fg2'];
 
     console.log('Got options: ' + JSON.stringify(options));
     return options;
@@ -93,11 +125,15 @@
 
   (function() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
+    var background2ColorPicker = document.getElementById('background2_color_picker');
     var foregroundColorPicker = document.getElementById('foreground_color_picker');
+    var foreground2ColorPicker = document.getElementById('foreground2_color_picker');
 
     // Load any previously saved configuration, if available
     backgroundColorPicker.value = localStorage['bg'];
+    background2ColorPicker.value = localStorage['bg2'];
     foregroundColorPicker.value = localStorage['fg'];
+    foreground2ColorPicker.value = localStorage['fg2'];
   })();
   </script>
 </html>

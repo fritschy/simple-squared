@@ -13,9 +13,9 @@ static inline int char2index(char c) {
    return 36;
 }
 
-int drawGlyph(GPoint p, int8_t g, uint8_t s, uint8_t c);
+int drawGlyph(GPoint p, int8_t g, int s, uint8_t c);
 
-static inline int drawChar(GPoint p, char g, uint8_t s, uint8_t c) {
+static inline int drawChar(GPoint p, char g, int s, uint8_t c) {
    return drawGlyph(p, char2index(g), s, c);
 }
 

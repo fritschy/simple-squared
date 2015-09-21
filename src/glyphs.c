@@ -362,6 +362,7 @@ static void drawGlyph6(GPoint p, int8_t g, uint8_t c) {
 
 // draw a glyph g (index into alnum or -1 for space) with fg color at p
 // with pixel size s (small font is 2, large one 5), return actual pixel width
+// just return glyph width when size is negative
 // 
 // some performance numbers (tested in a loop of 100 repetitions):
 // - drawing all glyphs once with size 3 takes ~0.5ms, that is about
@@ -369,40 +370,43 @@ static void drawGlyph6(GPoint p, int8_t g, uint8_t c) {
 // - size 5 glyphs take ~0.9ms for all glyphs
 // - size 6 glyphs tale 1.1ms
 // - size 6 with fbFillRect takes about 5ms for all glyphs
-int drawGlyph(GPoint p, int8_t g, uint8_t s, uint8_t c) {
-   // I have a feeling that this is quite enough... maybe a tad too much
-   switch (s) {
+int drawGlyph(GPoint p, int8_t g, int s, uint8_t c) {
+   if (s > 0) {
+      switch (s) {
 #ifdef GLYPH_SIZE_1
-      case 1:
-         drawGlyph1(p, g, c);
-         break;
+         case 1:
+            drawGlyph1(p, g, c);
+            break;
 #endif
-      case 2:
-         drawGlyph2(p, g, c);
-         break;
+         case 2:
+            drawGlyph2(p, g, c);
+            break;
 #ifdef GLYPH_SIZE_3
-      case 3:
-         drawGlyph3(p, g, c);
-         break;
+         case 3:
+            drawGlyph3(p, g, c);
+            break;
 #endif
 #ifdef GLYPH_SIZE_4
-      case 4:
-         drawGlyph4(p, g, c);
-         break;
+         case 4:
+            drawGlyph4(p, g, c);
+            break;
 #endif
-      case 5:
-         drawGlyph5(p, g, c);
-         break;
+         case 5:
+            drawGlyph5(p, g, c);
+            break;
 #ifdef GLYPH_SIZE_6
-      case 6:
-         drawGlyph6(p, g, c);
-         break;
+         case 6:
+            drawGlyph6(p, g, c);
+            break;
 #endif
-      default:
-         for (int y = 0; y < GHEIGHT; y++)
-            for (int x = 0, by = p.y+y*s; x < GWIDTH; x++)
-               if (mask_bit_set(alnum[g].mask, x, y))
-                  fbFillRect(GRect(p.x+x*s, by, s, s), c);
+         default:
+            for (int y = 0; y < GHEIGHT; y++)
+               for (int x = 0, by = p.y+y*s; x < GWIDTH; x++)
+                  if (mask_bit_set(alnum[g].mask, x, y))
+                     fbFillRect(GRect(p.x+x*s, by, s, s), c);
+      }
+   } else {
+      s = -s;
    }
    return alnum[g].w * s;
 }
